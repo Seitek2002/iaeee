@@ -1,0 +1,46 @@
+.events{
+    text-align: center;
+    background-color: $bg-blue-default;
+    margin-top: 67px;
+    padding-bottom: 50px;
+
+    &__title{
+        @include font(700,26px);
+        color: $text-white;
+        padding: 20px 0 ;
+    }
+    &__block{
+        background-color: $bg-white;
+        padding-top:1px ;
+        border-radius: 5px;
+        padding-bottom: 50px;
+    }
+    &__post{
+        background-color: $bg-blue-gray;
+        width: 872px;
+        margin: 0 auto;
+        display: block;
+        border-radius: 5px;
+        margin-top: 40px;
+    }
+    &__span{
+        width: 777px;
+        line-height: 40px;
+        @include font(400,16px);
+        color: $text-black-default;
+        padding: 16px 22px 31px 22px;
+    }
+
+    &__img{
+        margin-top: 30px;
+    }
+
+    .blue{
+        background-color: $bg-blue-default;
+    }
+    .work{
+        @include font(400,26px);
+        color: $text-white;
+        padding-top: 32px;
+    }
+}

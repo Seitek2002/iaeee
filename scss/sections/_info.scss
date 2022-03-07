@@ -1,0 +1,28 @@
+.info {
+  background-color: $bg-blue-default;
+padding: 85px 0px 90px 0px;
+  &__button {
+    margin: 0 auto;
+    display: block;
+    width: 710px;
+    height: 100px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: none;
+    @include font(500, 26px);
+    transition: 0.3s;
+  }
+  &__button:hover {
+    transition: 0.3s;
+    box-shadow: 0px -3px 28px #ffffff;
+  }
+  &__ul {
+    @include font(500, 26px);
+    color: #fff;
+    margin-top: 86px;
+  }
+  &__li {
+    margin-top: 36px;
+    line-height: 37px;
+}
+}

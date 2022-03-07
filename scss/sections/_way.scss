@@ -1,0 +1,39 @@
+.way {
+  margin-top: 85px;
+  background-color: $bg-blue-default;
+  text-align: center;
+  &__flex {
+    display: flex;
+    padding-bottom: 44px
+  }
+  &__title {
+    @include font(500, 26px);
+    color: $text-white;
+    line-height: 32px;
+    margin-top: 26px;
+    max-width: 500px;
+  }
+  &__title:last-child {
+    margin-left: 20px;
+  }
+  &__block {
+      margin-top: 30px;
+    background-color: $bg-white;
+    width: 500px;
+    border-radius: 5px;
+    height: 660px;
+  }
+
+  &__span {
+    @include font(400, 16px);
+    color: $text-black-default;
+    padding: 15px;
+    width: 435px;
+  }
+  &__span:last-child {
+    padding-bottom: 40px;
+  }
+  &__span:first-child {
+    padding-top: 29px;
+  }
+}

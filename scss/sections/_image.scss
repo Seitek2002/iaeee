@@ -1,0 +1,22 @@
+.image{
+    text-align: center;
+    img{
+        width: 100%;
+        margin: 32px 0px 36px 0px;
+    }
+   
+    &__title{
+       @include font(500,26px);
+       position: relative;
+       margin-bottom: 28px;
+    }
+    &__title::after{
+        position: absolute;
+        content: ' ';
+        width: 548px;
+        top: 35px;
+        left:-20px ;
+        height: 2px;
+        background-color: $bg-blue-default;
+    }
+}

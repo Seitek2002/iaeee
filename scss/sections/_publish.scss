@@ -1,0 +1,87 @@
+.publish {
+  text-align: center;
+  background-color: $bg-blue-default;
+  margin-top: 67px;
+  padding-bottom: 50px;
+
+  &__title {
+    @include font(700, 26px);
+    color: $text-white;
+    padding: 20px 0;
+  }
+  &__block {
+    background-color: $bg-white;
+    padding-top: 16px;
+    border-radius: 5px;
+    padding-bottom: 50px;
+  }
+  &__post {
+    background-color: $bg-blue-gray;
+    width: 872px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 5px;
+    margin-top: 40px;
+  }
+  &__span {
+    width: 777px;
+    @include font(400, 16px);
+    color: $text-black-default;
+    padding: 16px 22px 31px 22px;
+    line-height: 25px;
+  }
+
+  .blue {
+    background-color: $bg-blue-default;
+  }
+  .work {
+    @include font(400, 16px);
+    color: $text-white;
+    padding-top: 32px;
+    line-height: 30px;
+  }
+  .title {
+    @include font(400, 26px);
+    color: $text-white;
+    margin-top: 15px;
+  }
+  &__cart {
+    background-color: $bg-blue-darkness;
+    width: 871px;
+    margin: 0 auto;
+    display: block;
+    padding: 20px 0px;
+    border-radius: 5px;
+    margin-top: 50px;
+  }
+  &__flex {
+    display: flex;
+  }
+  
+  img {
+    width: 280px;
+    height: 280px;
+    margin-left: 20px
+  }
+  &__li {
+    @include font(400, 16px);
+    color: black;
+    padding: 10px 0px;
+    border-radius: 7px;
+    background-color: $bg-white;
+  }
+  &__box {
+    width: 470px;
+    padding: 13px;
+    border-radius: 5px;
+    background-color: $bg-blue-default;
+    margin-top: 8px;
+  }
+  hr{
+      height: 2px;
+      background-color: $bg-blue-default;
+      border: none;
+      width: 988px;
+      margin-top: 40px;
+  }
+}

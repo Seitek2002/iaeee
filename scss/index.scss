@@ -1,0 +1,49 @@
+@import './helpers/mixins';
+@import './helpers/variables';
+@import './components/header';
+@import './components/message';
+@import './sections/post';
+@import './sections/line';
+@import './sections/info';
+@import './sections/block';
+@import './sections/image';
+@import './sections/program';
+@import './sections/way';
+@import './sections/hero';
+@import './sections/events';
+@import './sections/publish';
+@import './sections/registr';
+@import './sections/button';
+
+
+
+
+@import './components/footer';
+
+
+
+a{
+    text-decoration: none;
+}
+
+body,nav,ul{
+    margin: 0;
+}
+li{
+    list-style: none;
+}
+.container{
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+h1,h2,h3,h4,h5,h6{
+    display: inline-block;
+}
+
+span{
+    @include font(500,12px);
+    display: inline-block;
+    line-height: 25px;
+
+}

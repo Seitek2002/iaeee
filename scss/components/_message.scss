@@ -1,0 +1,18 @@
+.message {
+  background-color: $bg-blue-default;
+  text-align: center;
+  padding: 50px 0px 50px 0px;
+    margin-top: 50px;
+
+  &__block{
+    background-color: $bg-white; 
+    border-radius: 5px;
+    
+  }
+  &__title{
+      padding: 20px;
+      @include font(500,24px);
+      position: relative;
+  }
+
+}

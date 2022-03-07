@@ -1,0 +1,58 @@
+.post {
+  margin-top: 93px;
+  padding-bottom: 43px;
+  background-color: $bg-blue-default;
+  text-align: center;
+  &__title {
+    @include font(700, 16px);
+    color: white;
+    padding-top: 20px;
+    padding-bottom: 37px;
+
+  }
+  &__block {
+    background-color: $bg-white;
+    border-radius: 5px;
+  }
+
+  &__text {
+    @include font(500, 18px);
+    color: $text-black-default;
+    padding-top: 14px;
+    padding-bottom: 37px;
+  }
+  &__descr {
+    color: $text-black-default;
+    padding: 0px 69px 46px 69px;
+    @include font(400, 18px);
+    color: $text-black-default;
+  }
+}
+
+.banner {
+  margin-top: 63px;
+  text-align: center;
+  background-color: $bg-white;
+  border-radius: 5px;
+  &__text {
+    display: inline-block;
+    @include font(500, 18px);
+    color: $text-black-default;
+    padding-top: 14px;
+    width: 703px;
+  }
+  &__ul {
+    color: $text-black-default;
+    @include font(400, 18px);
+    color: $text-black-default;
+  }
+  &__li {
+    padding: 10px;
+  }
+
+  &__descr {
+    @include font(400, 18px);
+    color: $text-black-default;
+    padding:10px 0px 36px 35px;
+  }
+}

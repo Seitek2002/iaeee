@@ -1,0 +1,7 @@
+.line{
+    margin: 70px;
+    &__linear{
+        height: 2px;
+        background-color: $bg-blue-default;
+    }
+}

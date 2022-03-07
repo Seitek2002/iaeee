@@ -1,0 +1,8 @@
+@mixin font($weight,$size) {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: $weight;
+    font-size: $size;
+    line-height: 15px;
+    color: #303B9B;
+}

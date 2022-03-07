@@ -1,0 +1,36 @@
+.top{
+    margin-top: 13px;
+    text-align: center;
+    // & = .top
+    &__text{
+        @include font(500, 12px);
+        max-width: 252px;
+        height: 47px;
+        display: inline-block;
+        // & = .top__text-----
+    }
+    &__logo{
+        margin-right: 10px;
+    }
+    
+}
+
+.bottom{
+    
+    background-color: $bg-blue-default;
+    &__nav{
+        @include font(400,12px);
+        
+    }
+
+    &__ul{
+    display: flex;
+    }
+    &__li{
+        margin: 10px;
+    }
+    &__a{
+      color: #fff; 
+       
+    }
+}

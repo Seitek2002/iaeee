@@ -1,0 +1,19 @@
+.block{
+    background-color: $bg-blue-default;
+    text-align: center;
+    .block__span:first-child{
+        padding-top: 47px;
+        color: $text-white;
+        line-height: 20px;
+    }
+    .block__span{
+        padding: 10px;
+        color: $text-white;
+        line-height: 20px;
+    }  
+    .block__span:last-child{
+        padding-bottom: 45px;
+        color: $text-white;
+        line-height: 20px;
+    }
+}
