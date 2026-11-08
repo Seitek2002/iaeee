@@ -1,5 +1,14 @@
 export { ButtonLink, Button, TextLink, buttonClass } from "./button";
 export { Chip } from "./chip";
+export {
+  ConfCard,
+  ConfDocList,
+  ConfHeading,
+  ConfPageHead,
+  PillLink,
+  pillClass,
+} from "./conference-kit";
+export { ConferenceMark } from "./conference-mark";
 export { Container } from "./container";
 export { Cover } from "./cover";
 export { Dialog } from "./dialog";

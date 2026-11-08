@@ -35,6 +35,25 @@ npm run deploy
 ветку `gh-pages`. GitHub Pages обновляется через минуту-две. Обычные `npm run
 dev` и `npm run build` работают без префикса `/iaeee`.
 
+## Сайт конференции (бывший icee.kg)
+
+Раздел `/conference` — сайт Международной конференции по сейсмостойкому
+строительству (VI ICEE, 22–28 июня 2026). У него своя шапка, подвал и дизайн:
+ультрамарин Иссык-Куля, абрикосовый акцент, шрифты Unbounded и Golos Text,
+фирменный образ — профиль маршрута Бишкек → Иссык-Куль с днями конференции.
+
+- Две языковые версии: `/conference/...` (русская) и `/conference/en/...`
+  (английская), переключатель RU/EN ведёт на ту же страницу.
+- Страницы: главная, программа (дни, сессии, 49 докладов, поиск и фильтр по
+  стране), участие (шаги, даты, взносы, реквизиты, требования к статьям,
+  отели, форма регистрации), награды МАЭСС, архив конференций I–VI.
+- Статус конференции считается по датам: после 28 июня 2026 сайт показывает
+  её как состоявшуюся, форма регистрации работает в демо-режиме.
+- Данные — в том же `src/shared/api/mock.ts` (блок «Конференция»), собраны с
+  icee.kg, информационных сообщений и финальной программы (PDF).
+- Маршруты разнесены по группам: `app/(site)` — сайт ассоциации,
+  `app/(conference)` — сайт конференции; каркасы лежат в `src/app`.
+
 ## Стек
 
 Next.js 16 (App Router, Turbopack, React Compiler в проде) · React 19 ·
@@ -55,7 +74,8 @@ src/
                      news-gallery, membership-cta
   features/          global-search, news-filter, article-search,
                      contact-request, membership-application, photo-viewer,
-                     newsletter-subscribe
+                     newsletter-subscribe, program-filter,
+                     conference-registration
   entities/          news-item, issue, person, member
   shared/
     api/             mock.ts (все данные), types.ts, функции getX()
@@ -78,6 +98,8 @@ src/
 | `features/contact-request` | черновик обращения (sessionStorage), тема подставляется со страницы услуг |
 | `features/membership-application` | чек-лист документов и заявка (localStorage) |
 | `features/photo-viewer` | полноэкранный просмотр фото |
+| `features/program-filter` | день программы, поиск по докладам, фильтр по стране |
+| `features/conference-registration` | черновик регистрации на конференцию (localStorage) |
 | `widgets/header` | мобильное меню |
 | `shared/ui/toast` | уведомления |
 

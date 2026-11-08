@@ -10,8 +10,8 @@ interface PersonCardProps {
 }
 
 /**
- * Портреты в архиве разного качества и с разным фоном, поэтому приводим их к
- * одному виду: монохром, одинаковый кадр 4:5.
+ * Портреты — в цвете, одинаковый кадр 4:5. Монохром только для ушедших
+ * членов президиума (вместе с подписью «Светлая память»).
  */
 export function PersonCard({
   person,
@@ -27,7 +27,10 @@ export function PersonCard({
             alt={person.name}
             fill
             sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
-            className="object-cover object-top grayscale contrast-[1.05]"
+            className={cn(
+              "object-cover object-top",
+              person.deceased && "grayscale",
+            )}
           />
         )}
       </div>

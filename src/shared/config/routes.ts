@@ -10,6 +10,7 @@ export const ROUTES = {
   membership: "/membership",
   documents: "/documents",
   contacts: "/contacts",
+  conference: "/conference",
 } as const;
 
 export interface NavItem {
@@ -24,5 +25,6 @@ export const MAIN_NAV: NavItem[] = [
   { href: ROUTES.services, label: "Услуги" },
   { href: ROUTES.members, label: "Члены" },
   { href: ROUTES.documents, label: "Документы" },
+  { href: ROUTES.conference, label: "Конференция" },
   { href: ROUTES.contacts, label: "Контакты" },
 ];

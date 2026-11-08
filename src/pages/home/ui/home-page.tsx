@@ -15,6 +15,7 @@ import {
 import { Container, SectionHeading } from "@/shared/ui";
 
 import { AboutTeaser } from "./about-teaser";
+import { ConferenceTeaser } from "./conference-teaser";
 import { Directions } from "./directions";
 import { Hero } from "./hero";
 import { LatestNews } from "./latest-news";
@@ -80,6 +81,7 @@ export async function HomePage() {
           <Chronicle milestones={milestones} />
         </Container>
       </section>
+      <ConferenceTeaser />
       <MembersPreview members={members} />
       <MembershipCta />
     </>

@@ -177,3 +177,153 @@ export interface SearchEntry {
   kind: SearchKind;
   title: string;
 }
+
+// ---------- Конференция (ICEE) ----------
+
+export type Lang = "en" | "ru";
+
+/** Текст на двух языках сайта конференции. */
+export interface LText {
+  en: string;
+  ru: string;
+}
+
+export type CountryIso =
+  | "AZ"
+  | "CA"
+  | "CN"
+  | "DE"
+  | "GE"
+  | "JP"
+  | "KG"
+  | "KZ"
+  | "PK"
+  | "RU"
+  | "TJ"
+  | "UZ";
+
+export interface ConferenceTalk {
+  country: CountryIso;
+  org: LText;
+  speaker: LText;
+  time: string;
+  title: LText;
+}
+
+export interface ConferenceSession {
+  id: string;
+  kind: "plenary" | "technical" | "workshop";
+  moderators: LText;
+  number?: number;
+  talks: ConferenceTalk[];
+  time: string;
+  title: LText;
+}
+
+export type ProgramItemKind =
+  | "break"
+  | "ceremony"
+  | "logistics"
+  | "meeting"
+  | "roundtable"
+  | "session"
+  | "social"
+  | "tour";
+
+export interface ProgramItem {
+  kind: ProgramItemKind;
+  note?: LText;
+  sessionId?: string;
+  time: string;
+  title: LText;
+}
+
+export interface ProgramDay {
+  date: ISODate;
+  items: ProgramItem[];
+  place: LText;
+  stage: "bishkek" | "lake" | "road";
+}
+
+export interface ConferenceVenue {
+  address: LText;
+  dates: LText;
+  id: "bishkek" | "lake";
+  map: string;
+  name: LText;
+  program: LText[];
+}
+
+export interface ConferenceFee {
+  item: LText;
+  kgs: number;
+  usd: number;
+}
+
+export interface HotelRate {
+  category: LText;
+  fullBoard?: number;
+  roomOnly: number;
+}
+
+export interface ConferenceDoc {
+  kind: FileKind;
+  title: LText;
+  url: string;
+}
+
+export interface Conference {
+  documents: ConferenceDoc[];
+  end: ISODate;
+  feeRules: LText[];
+  fees: ConferenceFee[];
+  format: LText[];
+  goals: LText[];
+  hotels: {
+    contacts: { name: LText; phone: string }[];
+    lakeRates: { body: HotelRate[]; cottage: HotelRate[] };
+    lakeRatesNote: LText;
+    lakePhones: string[];
+    notes: LText[];
+  };
+  keyDates: { date: LText; text: LText }[];
+  number: string;
+  online: LText;
+  organizers: LText[];
+  payment: {
+    bank: { label: LText; value: string }[];
+    individuals: LText;
+    legal: LText;
+  };
+  publication: LText;
+  registrationUrl: string;
+  requirements: LText[];
+  review: LText[];
+  roundTables: LText[];
+  start: ISODate;
+  steps: { text: LText; title: LText }[];
+  title: LText;
+  topics: LText[];
+  tours: { place: LText; text: LText; time: LText; title: LText }[];
+  venues: ConferenceVenue[];
+  welcome: LText;
+}
+
+export interface ConferenceEdition {
+  dates: LText;
+  links?: ConferenceDoc[];
+  number: string;
+  roundTables?: LText[];
+  summary: LText;
+  topics?: LText[];
+  venue: LText;
+  year: number | null;
+}
+
+export interface Award {
+  degrees?: LText[];
+  description: LText;
+  id: string;
+  name: LText;
+  spec: LText;
+}

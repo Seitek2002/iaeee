@@ -74,7 +74,7 @@ export function Header() {
                       href={item.href}
                       aria-current={active ? "page" : undefined}
                       className={cn(
-                        "relative inline-flex h-10 items-center px-3 text-[0.9375rem] transition-colors",
+                        "relative inline-flex h-10 items-center px-2.5 text-[0.9375rem] whitespace-nowrap transition-colors 2xl:px-3",
                         active
                           ? "text-petrol"
                           : "text-petrol/70 hover:text-petrol",
@@ -82,7 +82,7 @@ export function Header() {
                     >
                       {item.label}
                       {active && (
-                        <span className="absolute inset-x-3 -bottom-[15px] h-[2px] bg-amber" />
+                        <span className="absolute inset-x-2.5 -bottom-[15px] h-[2px] bg-amber 2xl:inset-x-3" />
                       )}
                     </Link>
                   </li>
@@ -98,7 +98,8 @@ export function Header() {
               size="sm"
               className="hidden sm:inline-flex"
             >
-              Вступить в ассоциацию
+              Вступить
+              <span className="hidden 2xl:inline">&nbsp;в ассоциацию</span>
             </ButtonLink>
             <button
               type="button"

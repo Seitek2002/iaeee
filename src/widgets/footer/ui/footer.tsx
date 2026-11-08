@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { MAIN_NAV, ROUTES, SITE } from "@/shared/config";
-import { ArrowUpRightIcon, Container, Logo } from "@/shared/ui";
+import { ArrowRightIcon, Container, Logo } from "@/shared/ui";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -68,15 +68,13 @@ export function Footer() {
                 </a>
               </p>
             </address>
-            <a
-              href={SITE.conferenceSite}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href={ROUTES.conference}
               className="mt-8 inline-flex items-center gap-2 border-b border-on-dark/30 pb-1 transition-colors hover:border-amber hover:text-amber"
             >
-              Сайт конференции icee.kg
-              <ArrowUpRightIcon size={16} />
-            </a>
+              VI конференция ICEE 2026
+              <ArrowRightIcon size={16} />
+            </Link>
           </div>
         </div>
 

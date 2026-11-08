@@ -1,4 +1,4 @@
-import { documents, issues, members, news } from "./mock";
+import { conferenceSessions, documents, issues, members, news } from "./mock";
 import type { SearchEntry } from "./types";
 
 const PAGES: SearchEntry[] = [
@@ -99,8 +99,19 @@ export async function getSearchIndex(): Promise<SearchEntry[]> {
     href: "/documents",
   }));
 
+  const talkEntries: SearchEntry[] = conferenceSessions.flatMap((s) =>
+    s.talks.map((t, i) => ({
+      id: `t-${s.id}-${i}`,
+      kind: "article" as const,
+      title: t.title.ru,
+      hint: `${t.speaker.ru} — доклад на VI конференции`,
+      href: "/conference/program",
+    })),
+  );
+
   return [
     ...PAGES,
+    ...talkEntries,
     ...newsEntries,
     ...articleEntries,
     ...memberEntries,

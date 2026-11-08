@@ -41,7 +41,7 @@ export function SearchTrigger({
       aria-label="Поиск по сайту (Ctrl+K)"
     >
       <SearchIcon size={19} />
-      <kbd className="hidden rounded-[2px] border border-rule-strong px-1.5 py-0.5 font-sans text-[0.6875rem] leading-none xl:inline">
+      <kbd className="hidden rounded-[2px] border border-rule-strong px-1.5 py-0.5 font-sans text-[0.6875rem] leading-none whitespace-nowrap 2xl:inline">
         Ctrl K
       </kbd>
     </button>

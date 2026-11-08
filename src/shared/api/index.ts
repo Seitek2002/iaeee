@@ -23,6 +23,12 @@ export {
   getServices,
   getStandards,
 } from "./organization";
+export {
+  getAwards,
+  getConference,
+  getConferenceEditions,
+  getConferenceProgram,
+} from "./conference";
 export { getDocuments } from "./documents";
 export { getSearchIndex } from "./search";
 export type * from "./types";

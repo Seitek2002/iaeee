@@ -10,15 +10,25 @@
  */
 import type {
   Article,
+  Award,
+  Conference,
+  ConferenceDoc,
+  ConferenceEdition,
+  ConferenceSession,
+  ConferenceTalk,
   ContactPerson,
+  CountryIso,
   DocumentItem,
   Issue,
   JournalInfo,
+  LText,
   Member,
   Milestone,
   NewsItem,
   Organization,
   Person,
+  ProgramDay,
+  ProgramItem,
   Service,
   Standard,
 } from "./types";
@@ -2317,5 +2327,1723 @@ export const documents: DocumentItem[] = [
       "2024/04/7-_-Рекомендации-по-устранению-пробелов-между-местными-и-международными-нормами.pdf",
     ),
     year: 2024,
+  },
+];
+
+// ============================================================
+// Конференция (ICEE) — данные сайта icee.kg
+// ============================================================
+// Источники: страницы icee.kg, информационные сообщения № 1 и № 2,
+// финальная программа VI МНПК и Положение о наградах МАЭСС (PDF).
+
+const ICEE = "https://icee.kg";
+const iceeUp = (path: string) => `${ICEE}/wp-content/uploads/${path}`;
+const L = (ru: string, en: string): LText => ({ ru, en });
+
+const talk = (
+  time: string,
+  country: CountryIso,
+  speaker: [string, string],
+  org: [string, string],
+  title: [string, string],
+): ConferenceTalk => ({
+  time,
+  country,
+  speaker: L(...speaker),
+  org: L(...org),
+  title: L(...title),
+});
+
+const TSNIISK = L(
+  "ЦНИИСК им. В. А. Кучеренко, АО «НИЦ «Строительство»",
+  "TsNIISK n.a. V. A. Kucherenko, Research Center “Construction” JSC",
+);
+const KSTU = L("КГТУ им. И. Раззакова", "KSTU n.a. I. Razzakov");
+const SATBAYEV = L("КазНИТУ им. К. И. Сатпаева", "Satbayev University");
+const NED = L(
+  "Инженерно-технологический университет NED, Карачи",
+  "NED University of Engineering and Technology, Karachi",
+);
+
+export const conference: Conference = {
+  number: "VI",
+  title: L(
+    "Международная научно-практическая конференция по сейсмостойкому строительству",
+    "International Scientific and Practical Conference on Earthquake Engineering",
+  ),
+  start: "2026-06-22",
+  end: "2026-06-28",
+  registrationUrl: "https://forms.intuit.kg/r/maess-2026/",
+  organizers: [
+    L(
+      "Министерство строительства, архитектуры и жилищно-коммунального хозяйства Кыргызской Республики",
+      "Ministry of Construction, Architecture and Housing and Communal Services of the Kyrgyz Republic",
+    ),
+    L(
+      "Международная ассоциация экспертов по сейсмостойкому строительству (МАЭСС)",
+      "International Association of Experts on Earthquake Engineering (IAEEE)",
+    ),
+  ],
+  welcome: L(
+    "Конференция собирает учёных и инженеров, которые исследуют, рассчитывают и проектируют сейсмостойкие здания: из стран СНГ и дальнего зарубежья, из научных и проектных институтов, строительных компаний и университетов. Приглашены аспиранты, магистранты и молодые учёные.",
+    "The conference brings together scientists and engineers who research, analyse and design earthquake-resistant buildings — from the CIS and beyond, from research and design institutes, construction companies and universities. Graduate students and young scientists are welcome.",
+  ),
+  goals: [
+    L(
+      "Расширить связи учёных и специалистов разных стран: обмен опытом, научно-технической и исследовательской информацией.",
+      "Expand connections between scientists and specialists from different countries to exchange experience and scientific, technical and research information.",
+    ),
+    L(
+      "Привлечь внимание к проблемам сейсмической безопасности, популяризировать инженерное образование, повышать качество расчётов, проектирования, обследования и усиления зданий.",
+      "Raise awareness of seismic safety, promote engineering education and improve the quality of analysis, design, inspection and retrofitting of buildings.",
+    ),
+    L(
+      "Сформировать единое пространство экспертов в сейсмостойком строительстве и системах сейсмоизоляции для эффективных решений по сейсмической безопасности.",
+      "Form a unified space for experts in earthquake engineering and seismic isolation to develop effective solutions for seismic safety.",
+    ),
+  ],
+  topics: [
+    L(
+      "Нормативно-техническая документация для проектирования сейсмостойких зданий",
+      "Codes and regulations for the design of earthquake-resistant buildings",
+    ),
+    L(
+      "Вибрационные испытания малоэтажных и высотных зданий",
+      "Vibration testing of low-rise and high-rise buildings",
+    ),
+    L(
+      "Проектирование с учётом пластического сейсмического поведения железобетонных каркасов",
+      "Design for ductile seismic behaviour of RC frame systems",
+    ),
+    L("Комплексные (каменные) конструкции", "Complex masonry structures"),
+    L("Системы сейсмической изоляции", "Seismic isolation systems"),
+    L(
+      "Индустриализация строительства и энергосбережение",
+      "Industrialised construction and energy saving",
+    ),
+    L(
+      "Инновации и передовые технологии",
+      "Innovation and advanced technologies",
+    ),
+    L(
+      "BIM-технологии в сейсмостойком строительстве",
+      "BIM in earthquake engineering",
+    ),
+    L(
+      "Страхование зданий от землетрясений",
+      "Earthquake insurance for buildings",
+    ),
+    L(
+      "Уроки землетрясений и сейсмическая безопасность",
+      "Lessons from earthquakes and seismic safety",
+    ),
+  ],
+  roundTables: [
+    L(
+      "Перспективные проекты в рамках МАЭСС",
+      "Promising projects within the IAEEE",
+    ),
+    L(
+      "Проектирование и строительство уникальных сооружений",
+      "Design and construction of unique structures",
+    ),
+    L(
+      "Развитие, внедрение и распространение технологий сейсмоизоляции",
+      "Development, implementation and dissemination of seismic isolation technologies",
+    ),
+  ],
+  format: [
+    L("Очно и онлайн (Zoom)", "In person and online (Zoom)"),
+    L(
+      "Русский и английский с синхронным переводом в Бишкеке",
+      "Russian and English, simultaneous interpretation in Bishkek",
+    ),
+    L(
+      "Пленарные доклады — 15 минут с обсуждением",
+      "Plenary papers — 15 minutes including discussion",
+    ),
+  ],
+  online: L(
+    "Пленарные дни транслировались в Zoom: конференция 814 0125 0686, код 0000.",
+    "Plenary days were streamed via Zoom: meeting 814 0125 0686, passcode 0000.",
+  ),
+  publication: L(
+    "Статьи участников опубликованы в журнале «Вестник МАЭСС» 2026/1 (21) — с DOI, в РИНЦ и в перечне рецензируемых журналов ВАК Кыргызской Республики.",
+    "Participants’ papers are published in the IAEEE Journal 2026/1 (21) — with DOI, indexed in RSCI and listed by the Higher Attestation Commission of the Kyrgyz Republic.",
+  ),
+  venues: [
+    {
+      id: "bishkek",
+      name: L("Sofia International Hotel", "Sofia International Hotel"),
+      address: L("Бишкек, ул. Медерова, 117", "117 Mederov St., Bishkek"),
+      dates: L("22–23 июня", "June 22–23"),
+      map: "https://2gis.kg/bishkek/search/Sofia%20International%20Hotel",
+      program: [
+        L("Торжественное открытие", "Opening ceremony"),
+        L("Семь пленарных сессий", "Seven plenary sessions"),
+        L("Семинар по сейсмоизоляции", "Base isolation workshop"),
+        L("Вручение наград МАЭСС", "IAEEE awards ceremony"),
+      ],
+    },
+    {
+      id: "lake",
+      name: L("Отель «Евразия»", "Evrasia Hotel"),
+      address: L("Иссык-Куль, с. Кара-Ой", "Kara-Oi village, Issyk-Kul"),
+      dates: L("25–26 июня", "June 25–26"),
+      map: "https://2gis.kg/search/%D0%95%D0%B2%D1%80%D0%B0%D0%B7%D0%B8%D1%8F%20%D0%9A%D0%B0%D1%80%D0%B0-%D0%9E%D0%B9",
+      program: [
+        L("Секционное заседание", "Technical session"),
+        L("Три круглых стола", "Three round tables"),
+        L(
+          "Закрытие и принятие резолюции",
+          "Closing and adoption of the resolution",
+        ),
+        L("Культурная программа на озере", "Cultural programme on the lake"),
+      ],
+    },
+  ],
+  tours: [
+    {
+      title: L("Стадион «Бишкек Арена»", "Bishkek Arena Stadium"),
+      text: L(
+        "Строительная площадка стадиона по стандартам FIFA на 51 тысячу зрителей.",
+        "Construction site of a FIFA-standard stadium for 51,000 spectators.",
+      ),
+      time: L("24 июня, 9:00–11:00", "June 24, 9:00–11:00"),
+      place: L("Бишкек", "Bishkek"),
+    },
+    {
+      title: L(
+        "Вибрационные испытания фасадных систем",
+        "Full-scale vibration testing of façade systems",
+      ),
+      text: L(
+        "Государственный институт сейсмостойкого строительства и инженерного проектирования (ГИССИП) Минстроя КР.",
+        "State Institute of Earthquake Resistant Construction and Engineering Design (GISSIP).",
+      ),
+      time: L("24 июня, 11:00–12:30", "June 24, 11:00–12:30"),
+      place: L("Бишкек, ул. Ч. Валиханова, 2", "2 Ch. Valikhanov St., Bishkek"),
+    },
+  ],
+  keyDates: [
+    {
+      date: L("12 июня", "June 12"),
+      text: L(
+        "Онлайн-регистрация, статьи для «Вестника» и презентации докладов",
+        "Online registration, papers for the Journal and presentations",
+      ),
+    },
+    {
+      date: L("20–21 июня", "June 20–21"),
+      text: L("Прибытие зарубежных гостей", "Arrival of international guests"),
+    },
+    {
+      date: L("22–23 июня", "June 22–23"),
+      text: L(
+        "Открытие и пленарные сессии в Бишкеке",
+        "Opening and plenary sessions in Bishkek",
+      ),
+    },
+    {
+      date: L("24 июня", "June 24"),
+      text: L(
+        "Технические экскурсии и переезд на Иссык-Куль",
+        "Technical tours and transfer to Issyk-Kul",
+      ),
+    },
+    {
+      date: L("25–26 июня", "June 25–26"),
+      text: L(
+        "Секция, круглые столы, закрытие и резолюция",
+        "Technical session, round tables, closing and resolution",
+      ),
+    },
+    {
+      date: L("27–28 июня", "June 27–28"),
+      text: L("Отъезд участников", "Departure of participants"),
+    },
+  ],
+  steps: [
+    {
+      title: L("Зарегистрируйтесь онлайн", "Register online"),
+      text: L(
+        "Заполните форму участника до крайнего срока регистрации.",
+        "Fill in the participant form before the registration deadline.",
+      ),
+    },
+    {
+      title: L(
+        "Отправьте статью и презентацию",
+        "Submit your paper and presentation",
+      ),
+      text: L(
+        "На seismokg@mail.ru — по требованиям к оформлению статей «Вестника МАЭСС».",
+        "To seismokg@mail.ru, following the IAEEE Journal paper requirements.",
+      ),
+    },
+    {
+      title: L("Оплатите взнос", "Pay the fee"),
+      text: L(
+        "Статья публикуется только после оплаты регистрационного взноса.",
+        "Papers are published only after the registration fee is paid.",
+      ),
+    },
+    {
+      title: L("Сообщите даты приезда", "Share your travel dates"),
+      text: L(
+        "Оргкомитет встретит зарубежных гостей в аэропорту и поможет с отелем.",
+        "The organising committee meets international guests at the airport and helps with hotels.",
+      ),
+    },
+  ],
+  fees: [
+    {
+      item: L(
+        "Регистрационный взнос местного участника",
+        "Registration fee, local participant",
+      ),
+      kgs: 3000,
+      usd: 35,
+    },
+    {
+      item: L(
+        "Регистрационный взнос зарубежного участника, очно или онлайн",
+        "Registration fee, international participant, in person or online",
+      ),
+      kgs: 15000,
+      usd: 172,
+    },
+    {
+      item: L(
+        "Трансфер Бишкек — Иссык-Куль — Бишкек",
+        "Transfer Bishkek — Issyk-Kul — Bishkek",
+      ),
+      kgs: 3000,
+      usd: 35,
+    },
+    {
+      item: L(
+        "Каждая дополнительная статья того же автора",
+        "Each additional paper by the same author",
+      ),
+      kgs: 3500,
+      usd: 40,
+    },
+    {
+      item: L(
+        "Участие без статьи, с сертификатом",
+        "Participation without a paper, with a certificate",
+      ),
+      kgs: 3000,
+      usd: 35,
+    },
+    {
+      item: L(
+        "Публикация статьи без участия",
+        "Paper publication without participation",
+      ),
+      kgs: 5000,
+      usd: 58,
+    },
+  ],
+  feeRules: [
+    L(
+      "Статьи принимаются и публикуются в «Вестнике МАЭСС» только после оплаты регистрационного взноса.",
+      "Papers are accepted and published in the IAEEE Journal only after the registration fee is paid.",
+    ),
+    L(
+      "Один оплаченный взнос — один автор (в том числе в соавторстве) публикует не более одной статьи.",
+      "One paid fee allows one author (including co-authorship) to publish no more than one paper.",
+    ),
+    L(
+      "Докладчикам вручаются дипломы, участникам без доклада — сертификаты.",
+      "Speakers receive diplomas; participants without a paper receive certificates.",
+    ),
+  ],
+  payment: {
+    legal: L(
+      "Юридическим лицам: письмо с полным названием организации главному бухгалтеру МАЭСС А. А. Дуйшокоевой на dajara2562@gmail.com — для счёта или счёта-фактуры.",
+      "Legal entities: send a letter with the organisation’s full name to the IAEEE Chief Accountant Azharkan Duishokoeva at dajara2562@gmail.com to receive an invoice.",
+    ),
+    individuals: L(
+      "Физическим лицам: через MBank по номеру +996 707 75 25 57 с указанием фамилии, имени и отчества.",
+      "Individuals: via MBank to +996 707 75 25 57, stating your full name.",
+    ),
+    bank: [
+      { label: L("Получатель", "Recipient"), value: "ОЮЛ «МАЭСС» / IAEEE" },
+      { label: L("ИНН", "TIN"), value: "02508201610026" },
+      { label: L("ОКПО", "OKPO"), value: "29753921" },
+      {
+        label: L("Банк", "Bank"),
+        value: "ОАО «РСК Банк», Мурас филиал, Бишкек",
+      },
+      { label: L("Расчётный счёт", "Account"), value: "1290533230401697" },
+      { label: L("БИК", "BIC"), value: "129053" },
+    ],
+  },
+  requirements: [
+    L(
+      "Формат А4, шрифт Times New Roman, одинарный интервал; текст доклада — с интервалом 1,5.",
+      "A4, Times New Roman, single spacing; main text with 1.5 spacing.",
+    ),
+    L(
+      "Заголовок — 14 пт полужирным прописными, основной текст и ключевые слова — 12 пт, аннотация — 10 пт.",
+      "Title 14 pt bold capitals, main text and keywords 12 pt, abstract 10 pt.",
+    ),
+    L(
+      "Название, сведения об авторах, аннотация (100–250 слов) и ключевые слова (5–10) — на кыргызском, русском и английском.",
+      "Title, author details, abstract (100–250 words) and keywords (5–10) in Kyrgyz, Russian and English.",
+    ),
+    L(
+      "Указать УДК или другой библиотечный индекс.",
+      "Provide a UDC or another library classification index.",
+    ),
+    L(
+      "Структура: введение, постановка задачи, решение и его обоснование, исследование и выводы, заключение.",
+      "Structure: introduction, problem statement, proposed solution, research and findings, conclusion.",
+    ),
+    L(
+      "Объём — от 5 до 15 страниц; последняя страница заполнена не менее чем на 75 %.",
+      "Length 5 to 15 pages; the last page at least 75% full.",
+    ),
+    L(
+      "Таблицы и рисунки встроены в текст, с номерами и подписями; ссылки — в квадратных скобках.",
+      "Tables and figures embedded, numbered and captioned; references in square brackets.",
+    ),
+    L(
+      "Оригинальность не ниже 88 %, отчёт «Антиплагиат» и рецензия специалиста с учёной степенью.",
+      "Originality of at least 88%, a plagiarism report and a review by a specialist with an academic degree.",
+    ),
+    L(
+      "Не менее 20 источников для обзорных статей и 10 — для разработок; рекомендуются ссылки с DOI.",
+      "At least 20 references for review papers and 10 for research papers; DOI links recommended.",
+    ),
+  ],
+  review: [
+    L(
+      "Все статьи проходят внешнее рецензирование; рецензент даёт заключение в течение 14 дней.",
+      "All papers undergo external peer review; the reviewer responds within 14 days.",
+    ),
+    L(
+      "Ответственный секретарь подтверждает получение статьи в течение трёх дней.",
+      "The executive secretary confirms receipt within three days.",
+    ),
+    L(
+      "Если нужны правки, статья возвращается автору; автор может аргументированно не согласиться с рецензентом.",
+      "If revisions are needed, the paper is returned to the author, who may respond to the reviewer with arguments.",
+    ),
+    L(
+      "Окончательное решение о публикации принимает главный редактор.",
+      "The final decision on publication is made by the editor-in-chief.",
+    ),
+  ],
+  hotels: {
+    notes: [
+      L(
+        "В Бишкеке участники выбирают отель самостоятельно, например Sofia International Hotel; оргкомитет поможет советом.",
+        "In Bishkek participants choose a hotel themselves, e.g. Sofia International Hotel; the committee can advise.",
+      ),
+      L(
+        "На Иссык-Куле номера в отеле «Евразия» стоит бронировать заранее.",
+        "On Issyk-Kul, rooms at the Evrasia Hotel should be booked in advance.",
+      ),
+      L(
+        "Зарубежных гостей оргкомитет встречает в аэропорту — сообщите даты приезда и отъезда.",
+        "The committee meets international guests at the airport — share your arrival and departure dates.",
+      ),
+    ],
+    contacts: [
+      {
+        name: L("Чолпон Рыспаева", "Cholpon Ryspaeva"),
+        phone: "+996 552 778 852",
+      },
+      {
+        name: L("Ажаркан Дуйшокоева", "Azharkan Duishokoeva"),
+        phone: "+996 707 75 25 57",
+      },
+    ],
+    lakeRates: {
+      body: [
+        {
+          category: L("Двухместный", "Double"),
+          fullBoard: 8000,
+          roomOnly: 7000,
+        },
+        {
+          category: L("Трёхместный", "Triple"),
+          fullBoard: 12000,
+          roomOnly: 11000,
+        },
+        {
+          category: L("Четырёхместный", "Quadruple"),
+          fullBoard: 16000,
+          roomOnly: 15000,
+        },
+        {
+          category: L("Шестиместный", "Six-bed"),
+          fullBoard: 24000,
+          roomOnly: 23000,
+        },
+      ],
+      cottage: [
+        {
+          category: L("Двухместный", "Double"),
+          fullBoard: 9000,
+          roomOnly: 8000,
+        },
+        {
+          category: L("Трёхместный", "Triple"),
+          fullBoard: 13000,
+          roomOnly: 12000,
+        },
+        {
+          category: L("Четырёхместный", "Quadruple"),
+          fullBoard: 17000,
+          roomOnly: 16000,
+        },
+        {
+          category: L("Особняк на 6–8 человек", "Villa for 6–8 guests"),
+          roomOnly: 36000,
+        },
+        {
+          category: L(
+            "Президентский номер на 6 человек",
+            "Presidential suite for 6",
+          ),
+          roomOnly: 22500,
+        },
+      ],
+    },
+    lakeRatesNote: L(
+      "Цены в сомах за номер в сутки, июнь 2026. С питанием — трёхразовый шведский стол.",
+      "Prices in KGS per room per night, June 2026. Full board includes three buffet meals.",
+    ),
+    lakePhones: ["+996 550 18 33 00", "+996 705 18 33 00", "+996 770 18 33 00"],
+  },
+  documents: [
+    {
+      kind: "pdf",
+      title: L("Программа VI конференции", "VI Conference programme"),
+      url: iceeUp("2026/06/Программа-VI-МНПК-МАЭСС-_-FINAL-_АС_УБ.pdf"),
+    },
+    {
+      kind: "pdf",
+      title: L("Информационное сообщение № 2", "Informative message No. 2"),
+      url: iceeUp("2026/06/Информационное-сообщение-№2-_-VI-МНПК-МАЭСС-1.pdf"),
+    },
+    {
+      kind: "pdf",
+      title: L(
+        "Информационное сообщение № 2 (английский)",
+        "Informative message No. 2 (English)",
+      ),
+      url: iceeUp("2026/06/Informative-message-No.-2-_-VI-ICEE-IAEEE-1.pdf"),
+    },
+    {
+      kind: "pdf",
+      title: L("Информационное сообщение № 1", "Informative message No. 1"),
+      url: iceeUp("2026/05/Информационное-сообщение-№1-_-VI-МНПК-МАЭСС.pdf"),
+    },
+    {
+      kind: "docx",
+      title: L("Образец статьи", "Paper template"),
+      url: iceeUp("2026/06/Образец-статьи-_-Paper-sample.docx"),
+    },
+    {
+      kind: "pdf",
+      title: L("Образец статьи (PDF)", "Paper template (PDF)"),
+      url: iceeUp("2026/06/Образец-статьи-_-Paper-sample.pdf"),
+    },
+  ],
+};
+
+export const conferenceSessions: ConferenceSession[] = [
+  {
+    id: "p1",
+    kind: "plenary",
+    number: 1,
+    time: "10:45–12:00",
+    title: L(
+      "Комплексные исследования по предупреждению последствий землетрясений и повышению сейсмостойкости сооружений",
+      "Comprehensive research on earthquake risk reduction and improving the seismic resilience of structures",
+    ),
+    moderators: L(
+      "А. А. Абдыкалыков, М. К. Абдыбалиев",
+      "Akymbek A. Abdykalykov, Marat K. Abdybaliev",
+    ),
+    talks: [
+      talk(
+        "10:45",
+        "KG",
+        ["К. Е. Абдрахматов", "Kanatbek E. Abdrakhmatov"],
+        ["Институт сейсмологии НАН КР", "Institute of Seismology, NAS KR"],
+        [
+          "Вероятностная карта оценки сейсмической опасности территории Кыргызской Республики",
+          "Probabilistic seismic hazard assessment map of the Kyrgyz Republic",
+        ],
+      ),
+      talk(
+        "11:00",
+        "KG",
+        ["К. Т. Канболотов", "Kanat T. Kanbolotov"],
+        ["ГИССИП Минстроя КР", "GISSIP, Minstroy KR"],
+        [
+          "Инновационный вектор сейсмостойкого строительства: модернизация нормирования, международная интеграция и новые достижения института",
+          "Innovative vector of earthquake-resistant construction: modernisation of regulation, international integration and new achievements of the institute",
+        ],
+      ),
+      talk(
+        "11:15",
+        "RU",
+        ["И. И. Ведяков", "Ivan I. Vedyakov"],
+        [TSNIISK.ru, TSNIISK.en],
+        [
+          "Опыт проектирования уникальных зданий и сооружений ЦНИИСК им. В. А. Кучеренко",
+          "Design experience of unique buildings and structures at TsNIISK n.a. V. A. Kucherenko",
+        ],
+      ),
+      talk(
+        "11:30",
+        "KG",
+        ["Д. Б. Абдыкалыков", "Daniiar B. Abdykalykov"],
+        ["МАЭСС", "IAEEE"],
+        [
+          "Виброиспытание фасадных систем, применяемых в Кыргызской Республике",
+          "Vibration testing of façade systems used in the Kyrgyz Republic",
+        ],
+      ),
+    ],
+  },
+  {
+    id: "p2",
+    kind: "plenary",
+    number: 2,
+    time: "13:00–14:30",
+    title: L(
+      "Проектирование зданий с учётом последствий землетрясений",
+      "Design of buildings taking into account the consequences of earthquakes",
+    ),
+    moderators: L(
+      "И. И. Ведяков, Е. М. Шокбаров",
+      "Ivan I. Vedyakov, Yeraly M. Shokbarov",
+    ),
+    talks: [
+      talk(
+        "13:00",
+        "UZ",
+        [
+          "Ш. А. Хакимов, Б. Б. Хайтбаев",
+          "Shamil A. Khakimov, B. B. Khaitbaev",
+        ],
+        [
+          "АО «ТошуйжойЛИТИ», «ANTISEISMIC»",
+          "ToshuyjoyLITI JSC, ANTISEISMIC LLC",
+        ],
+        [
+          "Концептуальные основы строительства высотных зданий и сооружений в сейсмических районах",
+          "Conceptual foundations of high-rise construction in seismic regions",
+        ],
+      ),
+      talk(
+        "13:15",
+        "KZ",
+        ["Е. М. Шокбаров", "Yeraly M. Shokbarov"],
+        ["АО «КазНИИСА»", "KazNIISA JSC"],
+        [
+          "Исследования сейсмической уязвимости кирпичных зданий по результатам паспортизации",
+          "Seismic vulnerability assessment of masonry buildings based on building inventory data",
+        ],
+      ),
+      talk(
+        "13:30",
+        "RU",
+        ["А. А. Бубис", "Aleksandr A. Bubis"],
+        [TSNIISK.ru, TSNIISK.en],
+        [
+          "Последствия разрушительных землетрясений. Анализ опыта",
+          "Consequences of destructive earthquakes. Analysis of experience",
+        ],
+      ),
+      talk(
+        "13:45",
+        "KZ",
+        [
+          "Ж. А. Омаров, Б. Б. Кулбаев, Е. М. Шокбаров",
+          "Zhasulan A. Omarov, Bekman B. Kulbaev, Yeraly M. Shokbarov",
+        ],
+        ["АО «КазНИИСА»", "KazNIISA JSC"],
+        [
+          "Вибродинамические испытания односекционного 9-этажного крупнопанельного жилого дома в Шымкенте",
+          "Vibrodynamic testing of a single-section 9-storey large-panel residential building in Shymkent",
+        ],
+      ),
+      talk(
+        "14:00",
+        "TJ",
+        ["Пулод Аминзода", "Pulod Aminzoda"],
+        [
+          "Институт геологии, сейсмостойкого строительства и сейсмологии НАН Таджикистана",
+          "Institute of Geology, Earthquake Engineering and Seismology, NAS of Tajikistan",
+        ],
+        [
+          "Перформенс-проектирование для оценки норм Таджикистана в области сейсмостойкого строительства",
+          "Using the PBSD approach to assess the reliability of Tajikistan seismic codes",
+        ],
+      ),
+      talk(
+        "14:15",
+        "KG",
+        ["У. Т. Бегалиев", "Ulugbek T. Begaliev"],
+        ["МАЭСС, МУИТ", "IAEEE, IntUIT"],
+        [
+          "Повышение сейсмостойкости зданий и сооружений в Кыргызской Республике",
+          "Increasing the earthquake resistance of buildings and structures in the Kyrgyz Republic",
+        ],
+      ),
+    ],
+  },
+  {
+    id: "p3",
+    kind: "plenary",
+    number: 3,
+    time: "14:30–15:45",
+    title: L(
+      "Инновационные технологии сейсмоизоляции",
+      "Innovative technologies for seismic isolation",
+    ),
+    moderators: L(
+      "А. А. Бубис, К. Т. Канболотов",
+      "Aleksandr A. Bubis, Kanat T. Kanbolotov",
+    ),
+    talks: [
+      talk(
+        "14:30",
+        "JP",
+        ["Томас Дроуин", "Thomas Drouin"],
+        ["Kawakin Core-Tech, Япония", "Kawakin Core-Tech, Japan"],
+        [
+          "Технологии сейсмической защиты: системы дополнительного демпфирования и сейсмоизоляции",
+          "Seismic protection technologies: supplemental damping and seismic isolation",
+        ],
+      ),
+      talk(
+        "14:45",
+        "RU",
+        ["А. А. Белый", "Andrei A. Belyi"],
+        ["ООО «К2 Инжиниринг»", "K2 Engineering LLC"],
+        [
+          "Современные системы сейсмозащиты и мониторинга инженерных сооружений: практика К2 Инжиниринг",
+          "Modern seismic protection and structural health monitoring: K2 Engineering experience",
+        ],
+      ),
+      talk(
+        "15:00",
+        "RU",
+        ["Я. В. Афанасьева", "Yana V. Afanasieva"],
+        ["АО «НИЦ «Строительство»", "Research Center “Construction” JSC"],
+        [
+          "Методы улучшения сейсмостойких конструкций для снижения уровня вибрации",
+          "Methods of improving earthquake-resistant structures to reduce vibration",
+        ],
+      ),
+      talk(
+        "15:15",
+        "RU",
+        ["А. В. Британ", "Anna V. Britan"],
+        ["РосРегионПроект", "RosRegionProekt"],
+        [
+          "Сейсмоизолирующие опорные элементы",
+          "Seismic isolation bearing elements",
+        ],
+      ),
+      talk(
+        "15:30",
+        "CN",
+        ["Сун Зонг", "Sun Zong"],
+        [
+          "Nanjing DADE Seismic Damping Technologies",
+          "Nanjing DADE Seismic Damping Technologies",
+        ],
+        [
+          "Интеллектуальное производство продукции для сейсмоизоляции и демпфирования",
+          "Intelligent manufacturing of seismic isolation and damping products",
+        ],
+      ),
+    ],
+  },
+  {
+    id: "p4",
+    kind: "plenary",
+    number: 4,
+    time: "16:00–17:30",
+    title: L(
+      "Современные подходы к проектированию, оценке и мониторингу зданий в сейсмических районах",
+      "Modern approaches to design, assessment and monitoring of buildings in seismic regions",
+    ),
+    moderators: L(
+      "Ш. А. Хакимов, Пулод Аминзода",
+      "Shamil A. Khakimov, Pulod Aminzoda",
+    ),
+    talks: [
+      talk(
+        "16:00",
+        "PK",
+        ["Мухаммад Масуд Рафи", "Muhammad Masood Rafi"],
+        [NED.ru, NED.en],
+        [
+          "Повреждения железобетонных зданий при землетрясении 2019 года в Мирпуре, Азад-Кашмир",
+          "Damage to reinforced concrete buildings in the 2019 Mirpur, Azad Kashmir earthquake",
+        ],
+      ),
+      talk(
+        "16:15",
+        "RU",
+        ["Р. Т. Акбиев", "Rustam T. Akbiev"],
+        [
+          "ФГБУ «ЦНИИП Минстроя России»",
+          "TsNIIP, Ministry of Construction of Russia",
+        ],
+        [
+          "Единая цифровая система мониторинга эксплуатационной безопасности объектов ЖКХ и социальной сферы",
+          "Unified digital system for operational safety monitoring of housing and social infrastructure",
+        ],
+      ),
+      talk(
+        "16:30",
+        "UZ",
+        ["Э. М. Юнусалиев", "Elmurad M. Yunusaliev"],
+        [
+          "Ферганский государственный технический университет",
+          "Fergana State Technical University",
+        ],
+        [
+          "Диагностика конструктивных деформаций высотных сооружений при динамических нагрузках",
+          "Diagnostics of structural deformations of high-rise structures under dynamic loads",
+        ],
+      ),
+      talk(
+        "16:45",
+        "TJ",
+        ["Дильшод Шарифзода", "Dilshod Sharifzoda"],
+        ["ГУП «Лоихакаш»", "SUE Loihakash"],
+        [
+          "Влияние количества ядер жёсткости на предельную длину здания в сейсмических районах",
+          "Influence of the number of rigidity cores on the ultimate building length in seismic zones",
+        ],
+      ),
+      talk(
+        "17:00",
+        "KG",
+        ["А. К. Стамов", "Aidarbek K. Stamov"],
+        ["МАЭСС", "IAEEE"],
+        [
+          "Сравнительный расчёт железобетонной рамы по СН КР 20-02:2024* в ETABS и ЛИРА-САПР",
+          "Comparative analysis of an RC frame per SN KR 20-02:2024* in ETABS and LIRA-SAPR",
+        ],
+      ),
+      talk(
+        "17:15",
+        "KG",
+        ["Эмил Абдыганы уулу", "Emil Abdygany uulu"],
+        ["ОсОО «Сейсмориск Интернешнал»", "Seismorisk International LLC"],
+        [
+          "Повреждения зданий с кирпичными стенами и их усиление",
+          "Damage to buildings with brick masonry walls and their retrofitting",
+        ],
+      ),
+    ],
+  },
+  {
+    id: "w1",
+    kind: "workshop",
+    time: "09:00–10:30",
+    title: L(
+      "Практический метод проектирования систем сейсмоизоляции на основе японской практики и норм Кыргызской Республики",
+      "Practical design procedure for base isolation systems based on Japanese practice and the Kyrgyz building code",
+    ),
+    moderators: L(
+      "А. К. Стамов, Биржан Шакирбаев (Mitsui & Co.); лектор — Томас Дроуин, Kawakin Core-Tech",
+      "Aidarbek K. Stamov, Birzhan Shakirbayev (Mitsui & Co.); lecturer — Thomas Drouin, Kawakin Core-Tech",
+    ),
+    talks: [],
+  },
+  {
+    id: "p5",
+    kind: "plenary",
+    number: 5,
+    time: "10:30–12:00",
+    title: L(
+      "Инженерная сейсмология, геотехника и сейсмическая безопасность инфраструктуры",
+      "Engineering seismology, geotechnics and seismic safety of infrastructure",
+    ),
+    moderators: L(
+      "В. А. Досенко, А. А. Абдыкалыков, Э. М. Юнусалиев",
+      "Viktor A. Dosenko, Akymbek A. Abdykalykov, Elmurad M. Yunusaliev",
+    ),
+    talks: [
+      talk(
+        "10:30",
+        "GE",
+        ["Т. А. Шилакадзе", "Tamaz A. Shilakadze"],
+        ["Институт «Груздорнаука», Грузия", "Gruzdornauka Institute, Georgia"],
+        [
+          "Инфраструктура транспортных систем",
+          "Transport systems infrastructure",
+        ],
+      ),
+      talk(
+        "10:45",
+        "RU",
+        ["Л. В. Нуждин", "Leonid V. Nuzhdin"],
+        ["НГАСУ (Сибстрин)", "SIBSTRIN, Novosibirsk"],
+        [
+          "Расчётные модели для анализа колебаний большеразмерных свайных фундаментов",
+          "Modelling approaches for vibrations of large multi-pile foundations",
+        ],
+      ),
+      talk(
+        "11:00",
+        "KG",
+        ["С. Ж. Орунбаев", "Sagynbek Orunbaev"],
+        ["KyrCOLD, АУЦА", "KyrCOLD, AUCA"],
+        [
+          "Сейсмический мониторинг крупных плотин и их инфраструктуры в Кыргызстане",
+          "Integrated seismic monitoring of large dams and dam infrastructure in Kyrgyzstan",
+        ],
+      ),
+      talk(
+        "11:15",
+        "KG",
+        ["Ж. К. Калысова", "Zhibek K. Kalysova"],
+        ["Институт сейсмологии НАН КР", "Institute of Seismology, NAS KR"],
+        [
+          "Сейсмотектонический потенциал Северного Тянь-Шаня",
+          "Seismotectonic potential of the Northern Tien Shan",
+        ],
+      ),
+      talk(
+        "11:30",
+        "AZ",
+        ["Ф. Г. Габибов", "Fakhraddin H. Gabibov"],
+        [
+          "Азербайджанский сектор Международной академии наук H&E",
+          "Azerbaijan Section, International Academy of Sciences H&E",
+        ],
+        [
+          "Скважинные экраны для защиты от сейсмических волн",
+          "Borehole screens for protection against seismic waves",
+        ],
+      ),
+    ],
+  },
+  {
+    id: "p6",
+    kind: "plenary",
+    number: 6,
+    time: "13:00–14:45",
+    title: L(
+      "Проектирование и анализ конструктивных решений зданий на сейсмические воздействия",
+      "Design and analysis of structural systems under seismic actions",
+    ),
+    moderators: L(
+      "Дильшод Шарифзода, С. Ж. Орунбаев",
+      "Dilshod Sharifzoda, Sagynbek Orunbaev",
+    ),
+    talks: [
+      talk(
+        "13:00",
+        "CA",
+        ["Светлана Бржев", "Svetlana N. Brzev"],
+        [
+          "Университет Британской Колумбии, Канада",
+          "University of British Columbia, Canada",
+        ],
+        [
+          "Проверка пластичности железобетонных диафрагм жёсткости",
+          "Ductility check of reinforced concrete shear walls",
+        ],
+      ),
+      talk(
+        "13:15",
+        "PK",
+        ["Мухаммад Масуд Рафи", "Muhammad Masood Rafi"],
+        [NED.ru, NED.en],
+        [
+          "Неопределённость свойств железобетона и неупругое поведение колонн при сейсмических нагрузках",
+          "Material uncertainty in reinforced concrete and the inelastic response of RC columns under seismic loading",
+        ],
+      ),
+      talk(
+        "13:30",
+        "RU",
+        ["Л. Н. Смирнова", "Lyubov N. Smirnova"],
+        ["АО «НИЦ «Строительство»", "Research Center “Construction” JSC"],
+        [
+          "Учёт неоднородности поля ускорений основания для протяжённых многоопорных сооружений",
+          "Accounting for non-uniform ground acceleration in long multi-support structures",
+        ],
+      ),
+      talk(
+        "13:45",
+        "KG",
+        ["А. М. Токтосунов", "Arzykul M. Toktosunov"],
+        ["ГИССИП, КРСУ им. Б. Н. Ельцина", "GISSIP, KRSU n.a. B. N. Yeltsin"],
+        [
+          "Балочная аналогия аппроксимации нелинейных свойств материалов для сейсмических расчётов",
+          "Beam analogy approximation of nonlinear material properties for seismic analysis",
+        ],
+      ),
+      talk(
+        "14:00",
+        "KG",
+        ["А. Э. Энсебеков", "Altynbek E. Ensebekov"],
+        [KSTU.ru, KSTU.en],
+        [
+          "Влияние заполняющих элементов на каркасы зданий, сравнение расчётных моделей",
+          "Effect of infill elements on building frames and comparison of analysis models",
+        ],
+      ),
+      talk(
+        "14:15",
+        "TJ",
+        ["Азиз Акрами", "Aziz Akrami"],
+        [
+          "НИПИ «Душанбешахрсоз»",
+          "Dushanbeshahrsoz Research and Design Institute",
+        ],
+        [
+          "Моделирование заполнения железобетонного каркаса из мелкоштучных материалов",
+          "Modelling RC frame infills of small-unit masonry in seismic analysis",
+        ],
+      ),
+      talk(
+        "14:30",
+        "KZ",
+        ["Н. О. Жиренбаева", "Nazgul O. Zhirenbaeva"],
+        [SATBAYEV.ru, SATBAYEV.en],
+        [
+          "Статический и сейсмический расчёт каркаса многоэтажного здания из металлических модулей в ЛИРА-САПР",
+          "Static and seismic analysis of a multi-storey steel modular frame in LIRA-SAPR",
+        ],
+      ),
+    ],
+  },
+  {
+    id: "p7",
+    kind: "plenary",
+    number: 7,
+    time: "14:45–16:30",
+    title: L(
+      "Сейсмический риск и уязвимость сооружений",
+      "Seismic risk and vulnerability of structures",
+    ),
+    moderators: L(
+      "Ж. А. Омаров, Д. Б. Абдыкалыков",
+      "Zhasulan A. Omarov, Daniiar B. Abdykalykov",
+    ),
+    talks: [
+      talk(
+        "14:45",
+        "KZ",
+        ["А. О. Файзолла", "Adi O. Faizolla"],
+        [SATBAYEV.ru, SATBAYEV.en],
+        [
+          "Эксплуатационная надёжность телебашни с учётом неопределённостей воздействий",
+          "Operational reliability of a TV tower considering uncertain actions",
+        ],
+      ),
+      talk(
+        "15:00",
+        "KG",
+        ["Ж. Ы. Маматов", "Zhanybek Y. Mamatov"],
+        [KSTU.ru, KSTU.en],
+        [
+          "Процессы повреждаемости индивидуальных жилых домов из глинистых материалов",
+          "Damage processes of individual houses made of clay materials",
+        ],
+      ),
+      talk(
+        "15:15",
+        "KG",
+        ["А. К. Матыева", "Akbermet K. Matyeva"],
+        ["МУИТ", "IntUIT"],
+        [
+          "Мелкозернистый бетон с добавками суперпластификаторов",
+          "Fine-grained concrete with superplasticiser additives",
+        ],
+      ),
+      talk(
+        "15:30",
+        "KG",
+        ["М. П. Камчыбеков", "Murataly P. Kamchybekov"],
+        ["Институт сейсмологии НАН КР", "Institute of Seismology, NAS KR"],
+        [
+          "Типы жилых зданий на территории г. Нарын",
+          "Types of residential buildings in Naryn",
+        ],
+      ),
+      talk(
+        "15:45",
+        "KG",
+        [
+          "А. Ж. Андашев, А. А. Каримкулов",
+          "Akylbek Zh. Andashev, Aslidin A. Karimkulov",
+        ],
+        [KSTU.ru, KSTU.en],
+        [
+          "Сейсмическая устойчивость каменных зданий, усиленных железобетонными элементами",
+          "Seismic stability of masonry buildings strengthened with RC elements",
+        ],
+      ),
+      talk(
+        "16:00",
+        "KZ",
+        ["Г. С. Тулегенова", "Gulnur S. Tulegenova"],
+        [
+          "Кызылординский университет им. Коркыт Ата",
+          "Korkyt Ata Kyzylorda University",
+        ],
+        [
+          "Вероятностный анализ надёжности старых зданий Кызылорды при сейсмических воздействиях",
+          "Probabilistic reliability analysis of old buildings in Kyzylorda under seismic actions",
+        ],
+      ),
+      talk(
+        "16:15",
+        "DE",
+        ["Владимир Шкатов", "Vladimir Shkatov"],
+        ["Allbau Software GmbH, Германия", "Allbau Software GmbH, Germany"],
+        [
+          "Международный опыт проектирования в BIM",
+          "International experience of design with BIM",
+        ],
+      ),
+    ],
+  },
+  {
+    id: "t1",
+    kind: "technical",
+    time: "10:00–13:00",
+    title: L(
+      "Экспериментально-теоретические исследования сейсмостойкости сооружений",
+      "Experimental and theoretical studies on seismic resistance of structures",
+    ),
+    moderators: L(
+      "М. М. Саломзода, Ж. Ы. Маматов",
+      "Murodbek Salomzoda, Zhanybek Y. Mamatov",
+    ),
+    talks: [
+      talk(
+        "10:00",
+        "RU",
+        ["И. Р. Гизятуллин", "Ilnur R. Gizyatullin"],
+        [TSNIISK.ru, TSNIISK.en],
+        [
+          "Диагностика резинометаллических сейсмоизолирующих опор и прогноз их остаточного срока службы",
+          "Condition diagnostics of rubber-metal isolation bearings and prediction of their remaining service life",
+        ],
+      ),
+      talk(
+        "10:15",
+        "KG",
+        ["Жанышбек Казыбаев", "Zhanyshbek Kazybaev"],
+        ["ГИССИП, Ош", "GISSIP, Osh"],
+        [
+          "Деревянные конструкции в индивидуальном жилищном строительстве",
+          "Wooden structures in individual housing construction",
+        ],
+      ),
+      talk(
+        "10:30",
+        "KG",
+        ["А. З. Абдыкадыров", "Askhat Z. Abdykadyrov"],
+        ["ОсОО «Seido Systems»", "Seido Systems LLC"],
+        [
+          "Зависимости «сила — перемещение» при испытаниях стеновых панелей из ЛСТК",
+          "Force–displacement relationships in tests of light steel wall panels",
+        ],
+      ),
+      talk(
+        "10:45",
+        "UZ",
+        [
+          "С. Ж. Раззаков, Э. М. Юнусалиев",
+          "Sobirzhon Zh. Razzakov, Elmurad M. Yunusaliev",
+        ],
+        [
+          "Наманганский государственный технический университет",
+          "Namangan State Technical University",
+        ],
+        [
+          "Оценка сейсмической надёжности многоэтажных гражданских зданий",
+          "Seismic reliability assessment of multi-storey civil buildings",
+        ],
+      ),
+      talk(
+        "11:00",
+        "UZ",
+        [
+          "С. Ж. Раззаков, А. Ш. Мартазаев",
+          "Sobirzhon Zh. Razzakov, A. Sh. Martazaev",
+        ],
+        [
+          "Наманганский государственный технический университет",
+          "Namangan State Technical University",
+        ],
+        [
+          "Прочность фиброжелезобетонных балок по наклонному сечению",
+          "Shear strength of steel-fibre reinforced concrete beams",
+        ],
+      ),
+      talk(
+        "11:15",
+        "KG",
+        ["А. Э. Энсебеков", "Altynbek E. Ensebekov"],
+        [KSTU.ru, KSTU.en],
+        [
+          "Локальное сейсмическое усиление зданий композитными материалами",
+          "Local seismic strengthening of buildings with composites",
+        ],
+      ),
+      talk(
+        "11:30",
+        "RU",
+        ["М. А. Клячко", "Mark A. Klyachko"],
+        ["АНО «РАДАР»", "RADAR"],
+        [
+          "Уроки землетрясений и сейсмическая безопасность",
+          "Lessons from earthquakes and seismic safety",
+        ],
+      ),
+      talk(
+        "11:45",
+        "KG",
+        ["А. К. Стамов", "Aidarbek K. Stamov"],
+        ["МАЭСС", "IAEEE"],
+        [
+          "Коэффициент сейсмостойкости железобетонной рамы по СН КР 22-01:2018*",
+          "Seismic resistance coefficient of an RC frame per SN KR 22-01:2018*",
+        ],
+      ),
+      talk(
+        "12:00",
+        "KG",
+        ["А. К. Акматов", "Adylbek K. Akmatov"],
+        ["КРСУ им. Б. Н. Ельцина", "KRSU n.a. B. N. Yeltsin"],
+        [
+          "Концепция сейсмозащиты зданий",
+          "Seismic protection concept for buildings",
+        ],
+      ),
+    ],
+  },
+];
+
+const item = (
+  time: string,
+  kind: ProgramItem["kind"],
+  title: [string, string],
+  sessionId?: string,
+  note?: [string, string],
+): ProgramItem => ({
+  time,
+  kind,
+  title: L(...title),
+  sessionId,
+  note: note ? L(...note) : undefined,
+});
+
+export const conferenceDays: ProgramDay[] = [
+  {
+    date: "2026-06-22",
+    stage: "bishkek",
+    place: L(
+      "Бишкек, Sofia International Hotel",
+      "Bishkek, Sofia International Hotel",
+    ),
+    items: [
+      item("09:00", "logistics", [
+        "Регистрация участников",
+        "Registration of participants",
+      ]),
+      item("09:30", "meeting", [
+        "Заседание членов-организаций МАЭСС",
+        "Meeting of IAEEE member organisations",
+      ]),
+      item(
+        "10:00",
+        "ceremony",
+        ["Торжественное открытие конференции", "Opening ceremony"],
+        undefined,
+        [
+          "Вступительное слово — президент МАЭСС У. Т. Бегалиев. Приветствия: министр строительства КР Н. К. Орунтаев, представители Министерства науки КР, ЦНИИСК (Россия), ТошуйжойЛИТИ (Узбекистан), КазНИИСА (Казахстан), Груздорнаука (Грузия), Kawakin Core-Tech (Япония), университета NED (Пакистан), НАН Таджикистана.",
+          "Opening remarks by IAEEE President Ulugbek Begaliev. Welcome speeches: Minister of Construction N. K. Oruntaev, the Ministry of Science of the Kyrgyz Republic, TsNIISK (Russia), ToshuyjoyLITI (Uzbekistan), KazNIISA (Kazakhstan), Gruzdornauka (Georgia), Kawakin Core-Tech (Japan), NED University (Pakistan) and the NAS of Tajikistan.",
+        ],
+      ),
+      item(
+        "10:45",
+        "session",
+        ["Пленарная сессия 1", "Plenary session 1"],
+        "p1",
+      ),
+      item("12:00", "break", [
+        "Групповое фото и перерыв",
+        "Group photo and coffee break",
+      ]),
+      item(
+        "13:00",
+        "session",
+        ["Пленарная сессия 2", "Plenary session 2"],
+        "p2",
+      ),
+      item(
+        "14:30",
+        "session",
+        ["Пленарная сессия 3", "Plenary session 3"],
+        "p3",
+      ),
+      item("15:45", "break", ["Перерыв", "Break"]),
+      item(
+        "16:00",
+        "session",
+        ["Пленарная сессия 4", "Plenary session 4"],
+        "p4",
+      ),
+    ],
+  },
+  {
+    date: "2026-06-23",
+    stage: "bishkek",
+    place: L(
+      "Бишкек, Sofia International Hotel",
+      "Bishkek, Sofia International Hotel",
+    ),
+    items: [
+      item(
+        "09:00",
+        "session",
+        ["Семинар по сейсмоизоляции", "Base isolation workshop"],
+        "w1",
+      ),
+      item(
+        "10:30",
+        "session",
+        ["Пленарная сессия 5", "Plenary session 5"],
+        "p5",
+      ),
+      item("10:30", "meeting", [
+        "Заседание членов-организаций МАЭСС",
+        "Meeting of IAEEE member organisations",
+      ]),
+      item("12:00", "break", ["Перерыв", "Coffee break"]),
+      item(
+        "13:00",
+        "session",
+        ["Пленарная сессия 6", "Plenary session 6"],
+        "p6",
+      ),
+      item(
+        "14:45",
+        "session",
+        ["Пленарная сессия 7", "Plenary session 7"],
+        "p7",
+      ),
+      item("16:30", "ceremony", [
+        "Вручение наград и медалей МАЭСС",
+        "IAEEE awards and medals ceremony",
+      ]),
+      item("18:00", "social", ["Ужин для гостей", "Dinner for guests"]),
+    ],
+  },
+  {
+    date: "2026-06-24",
+    stage: "road",
+    place: L("Бишкек → Иссык-Куль", "Bishkek → Issyk-Kul"),
+    items: [
+      item(
+        "09:00",
+        "tour",
+        [
+          "Экскурсия на стадион «Бишкек Арена»",
+          "Tour of the Bishkek Arena stadium",
+        ],
+        undefined,
+        [
+          "Строительство по стандартам FIFA, 51 тысяча зрителей.",
+          "FIFA-standard construction, 51,000 seats.",
+        ],
+      ),
+      item(
+        "11:00",
+        "tour",
+        [
+          "Экскурсия в ГИССИП: вибрационные испытания фасадных систем",
+          "GISSIP tour: full-scale vibration testing of façades",
+        ],
+        undefined,
+        ["Бишкек, ул. Ч. Валиханова, 2.", "2 Ch. Valikhanov St., Bishkek."],
+      ),
+      item("12:30", "break", ["Обед", "Packed lunch"]),
+      item("13:00", "logistics", [
+        "Выезд на Иссык-Куль",
+        "Departure to Issyk-Kul",
+      ]),
+      item("18:00", "logistics", [
+        "Размещение в отеле «Евразия», Кара-Ой",
+        "Check-in at the Evrasia Hotel, Kara-Oi",
+      ]),
+    ],
+  },
+  {
+    date: "2026-06-25",
+    stage: "lake",
+    place: L("Иссык-Куль, отель «Евразия»", "Issyk-Kul, Evrasia Hotel"),
+    items: [
+      item(
+        "10:00",
+        "session",
+        ["Секционное заседание", "Technical session"],
+        "t1",
+      ),
+      item("13:00", "break", ["Перерыв", "Break"]),
+      item("14:00", "roundtable", [
+        "Круглый стол «Перспективные проекты в рамках МАЭСС»",
+        "Round table “Promising projects within the IAEEE”",
+      ]),
+      item("15:00", "social", ["Прогулка на яхте", "Yacht cruise"]),
+    ],
+  },
+  {
+    date: "2026-06-26",
+    stage: "lake",
+    place: L("Иссык-Куль, отель «Евразия»", "Issyk-Kul, Evrasia Hotel"),
+    items: [
+      item("10:00", "roundtable", [
+        "Круглый стол «Проектирование и строительство уникальных сооружений»",
+        "Round table “Design and construction of unique structures”",
+      ]),
+      item("11:00", "roundtable", [
+        "Круглый стол «Технологии сейсмоизоляции зданий и сооружений»",
+        "Round table “Seismic isolation technologies for buildings”",
+      ]),
+      item("12:00", "ceremony", [
+        "Закрытие конференции, итоги и резолюция",
+        "Closing ceremony, summary and resolution",
+      ]),
+      item("14:00", "social", ["Свободное время", "Free time"]),
+    ],
+  },
+];
+
+export const conferenceEditions: ConferenceEdition[] = [
+  {
+    number: "VI",
+    year: 2026,
+    dates: L("22–28 июня 2026", "June 22–28, 2026"),
+    venue: L(
+      "Бишкек, Sofia International Hotel — Иссык-Куль, отель «Евразия»",
+      "Bishkek, Sofia International Hotel — Issyk-Kul, Evrasia Hotel",
+    ),
+    summary: L(
+      "Около 50 докладов из 12 стран, семинар Kawakin Core-Tech по сейсмоизоляции, экскурсии на «Бишкек Арену» и в ГИССИП. Организаторы — Минстрой КР и МАЭСС.",
+      "About 50 papers from 12 countries, a Kawakin Core-Tech base isolation workshop, tours of Bishkek Arena and GISSIP. Organised by Minstroy KR and the IAEEE.",
+    ),
+  },
+  {
+    number: "V",
+    year: 2024,
+    dates: L("9–14 сентября 2024", "September 9–14, 2024"),
+    venue: L(
+      "Бишкек, Sofia International Hotel — Иссык-Куль, пансионат «Ак-Бермет», Кара-Ой",
+      "Bishkek, Sofia International Hotel — Issyk-Kul, Ak-Bermet resort, Kara-Oi",
+    ),
+    summary: L(
+      "Выставка, награждения, техническая экскурсия в жилмассив «Алтын Ордо», презентация REGUPOL INODIS (Германия) о сейсмоизоляции стенового заполнения. Вручены премии конкурса молодых учёных MAURER.",
+      "Exhibition, awards, a technical tour of the Altyn Ordo residential area and a REGUPOL INODIS (Germany) presentation on seismic decoupling of masonry infills. Prizes of the MAURER young scientists contest were awarded.",
+    ),
+    topics: [
+      L("Нормативно-техническая документация", "Codes and regulations"),
+      L(
+        "Сейсмическая опасность и сейсморайонирование",
+        "Seismic hazard and zoning",
+      ),
+      L(
+        "Индустриализация строительства и энергосбережение",
+        "Industrialised construction and energy saving",
+      ),
+      L(
+        "Проектирование и анализ конструктивных решений",
+        "Structural design and analysis",
+      ),
+      L("Инновационные системы сейсмоизоляции", "Innovative seismic isolation"),
+      L("Сейсмический риск и уязвимость", "Seismic risk and vulnerability"),
+      L(
+        "Обследование и усиление существующих зданий",
+        "Inspection and retrofitting of existing buildings",
+      ),
+      L(
+        "Гидротехнические, транспортные и подземные сооружения",
+        "Hydraulic, transport and underground structures",
+      ),
+      L(
+        "Геотехника и дистанционное зондирование",
+        "Geotechnics and remote sensing",
+      ),
+      L("Сейсмическая безопасность школ", "Seismic safety of schools"),
+      L("Страхование от землетрясений", "Earthquake insurance"),
+    ],
+    roundTables: [
+      L(
+        "Приём новых членов-организаций МАЭСС",
+        "Admission of new IAEEE member organisations",
+      ),
+      L(
+        "Сейсмическая безопасность школьных зданий",
+        "Seismic safety of school buildings",
+      ),
+      L("Сотрудничество в рамках МАЭСС", "Cooperation within the IAEEE"),
+      L(
+        "Современные тренды и перспективные проекты",
+        "Current trends and promising projects",
+      ),
+    ],
+    links: [
+      {
+        kind: "pdf",
+        title: L("Программа V конференции", "V Conference programme"),
+        url: iceeUp("2024/09/Программа-V-МНПК-МАЭСС_ДА_УБ_МК_САК_УБ.pdf"),
+      },
+      {
+        kind: "link",
+        title: L("Презентации докладов", "Presentations"),
+        url: "https://disk.yandex.ru/d/64ZxCK1CsjShdQ",
+      },
+      {
+        kind: "link",
+        title: L("Фотографии", "Photos"),
+        url: "https://disk.yandex.ru/d/9_gX47dedPgQXA",
+      },
+    ],
+  },
+  {
+    number: "IV",
+    year: null,
+    dates: L("Сведения переносятся", "Details are being migrated"),
+    venue: L("—", "—"),
+    summary: L(
+      "Материалы IV конференции пока не перенесены на новый сайт.",
+      "Materials of the IV conference have not yet been migrated to the new site.",
+    ),
+  },
+  {
+    number: "III",
+    year: 2022,
+    dates: L("4–9 июля 2022", "July 4–9, 2022"),
+    venue: L("Кыргызская Республика", "Kyrgyz Republic"),
+    summary: L(
+      "Материалы III конференции переносятся на новый сайт.",
+      "Materials of the III conference are being migrated to the new site.",
+    ),
+  },
+  {
+    number: "II",
+    year: 2018,
+    dates: L("24–30 июня 2018", "June 24–30, 2018"),
+    venue: L("Кыргызская Республика", "Kyrgyz Republic"),
+    summary: L(
+      "Прошла в год, когда эксперты МАЭСС сопровождали разработку норм СН КР 20-02:2018, 22-01:2018 и 31-02:2018.",
+      "Held in the year IAEEE experts supported the development of codes SN KR 20-02:2018, 22-01:2018 and 31-02:2018.",
+    ),
+  },
+  {
+    number: "I",
+    year: 2016,
+    dates: L("25–31 августа 2016", "August 25–31, 2016"),
+    venue: L("Кыргызская Республика", "Kyrgyz Republic"),
+    summary: L(
+      "Первая конференция ассоциации — в год её основания. По итогам вышел первый номер «Вестника МАЭСС».",
+      "The association’s first conference, held in its founding year. The first issue of the IAEEE Journal followed.",
+    ),
+  },
+];
+
+export const awards: Award[] = [
+  {
+    id: "contribution",
+    name: L(
+      "Медаль «За вклад в развитие сейсмостойкого строительства»",
+      "Medal “For Contribution to the Development of Earthquake Engineering”",
+    ),
+    spec: L("40 мм, серебристая", "40 mm, silver"),
+    description: L(
+      "За личный вклад экспертов, учёных, инженеров и специалистов в развитие сейсмостойкого строительства и объединение общих усилий в этой области.",
+      "For the personal contribution of experts, scientists and engineers to earthquake engineering and to uniting efforts in the field.",
+    ),
+  },
+  {
+    id: "research",
+    name: L(
+      "Медаль «Заслуженный деятель в исследовании сейсмостойкости сооружений»",
+      "Medal “Distinguished Person in the Study of Seismic Resistance of Structures”",
+    ),
+    spec: L(
+      "45 мм, I степень — золотистая, II — серебристая",
+      "45 mm, 1st degree gold, 2nd degree silver",
+    ),
+    description: L(
+      "Для экспертов, учёных и исследователей.",
+      "For experts, scientists and researchers.",
+    ),
+    degrees: [
+      L(
+        "I степень — выдающиеся достижения, признанные на международном уровне",
+        "1st degree — outstanding achievements recognised internationally",
+      ),
+      L(
+        "II степень — значительные исследования, признанные на национальном уровне",
+        "2nd degree — significant research recognised nationally",
+      ),
+    ],
+  },
+  {
+    id: "construction",
+    name: L(
+      "Медаль «Заслуженный деятель в области сейсмостойкого строительства»",
+      "Medal “Distinguished Person in the Field of Earthquake-Resistant Construction”",
+    ),
+    spec: L(
+      "45 мм, I степень — золотистая, II — серебристая",
+      "45 mm, 1st degree gold, 2nd degree silver",
+    ),
+    description: L(
+      "Для учёных и инженеров-строителей.",
+      "For scientists and civil engineers.",
+    ),
+    degrees: [
+      L(
+        "I степень — крупные инновационные проекты, существенно улучшившие сейсмостойкость сооружений",
+        "1st degree — major innovative projects that substantially improved seismic resistance",
+      ),
+      L(
+        "II степень — успешное внедрение новых методов и технологий",
+        "2nd degree — successful implementation of new methods and technologies",
+      ),
+    ],
+  },
+  {
+    id: "science",
+    name: L(
+      "Знак «За вклад в развитие науки и техники»",
+      "Badge “For Contribution to the Development of Science and Technology”",
+    ),
+    spec: L(
+      "70 мм, I степень — золотистый, II — серебристый",
+      "70 mm, 1st degree gold, 2nd degree silver",
+    ),
+    description: L(
+      "Для деятелей науки и техники.",
+      "For figures in science and technology.",
+    ),
+    degrees: [
+      L(
+        "I степень — фундаментальные научные и технические достижения",
+        "1st degree — fundamental scientific and technical achievements",
+      ),
+      L(
+        "II степень — практические разработки, широко применяемые в сейсмостойком строительстве",
+        "2nd degree — practical developments widely applied in earthquake engineering",
+      ),
+    ],
+  },
+];
+
+export const awardRules: LText[] = [
+  L(
+    "Представление оформляет руководитель организации на имя президента МАЭСС.",
+    "The nomination is prepared by the head of the organisation and addressed to the IAEEE President.",
+  ),
+  L(
+    "К представлению прилагаются подробная характеристика на русском и английском, ходатайство с подписью и печатью и рекомендация организации — члена МАЭСС.",
+    "It includes a detailed profile in Russian and English, a signed and sealed petition, and a recommendation from an IAEEE member organisation.",
+  ),
+  L(
+    "На каждого кандидата — отдельное представление на seismokg@mail.ru не позднее чем за 10 дней до конференции.",
+    "One nomination per candidate, sent to seismokg@mail.ru at least 10 days before the conference.",
+  ),
+  L(
+    "Награждение идёт последовательно — от низших наград к высшим.",
+    "Awards follow a sequence — from lower to higher distinctions.",
+  ),
+  L(
+    "Решение принимает экспертная комиссия открытым голосованием простым большинством.",
+    "An expert commission decides by open vote and simple majority.",
+  ),
+];
+
+export const donation = {
+  text: L(
+    "Добровольные взносы помогают проводить конференции, исследования и обучение. Взнос принимается в удобной для обеих сторон валюте — разово, ежемесячно или ежегодно.",
+    "Voluntary contributions support conferences, research and training. Contributions are accepted in any mutually convenient currency — once, monthly or annually.",
+  ),
+  purposes: [
+    L("Без ограничений", "Unrestricted"),
+    L("Проведение международных конференций", "International conferences"),
+    L("Финансирование исследований", "Research funding"),
+    L(
+      "Международные проекты по сейсмостойкому строительству",
+      "International earthquake engineering projects",
+    ),
+    L("Обучение специалистов", "Training of specialists"),
+    L(
+      "Приведение строительных норм к единым стандартам",
+      "Harmonisation of building codes",
+    ),
+  ],
+  documents: [
+    {
+      kind: "pdf",
+      title: L("Форма добровольного взноса", "Voluntary contribution form"),
+      url: iceeUp("2026/06/Добровольный-взнос-для-МАЭСС.pdf"),
+    },
+    {
+      kind: "pdf",
+      title: L(
+        "Форма добровольного взноса (английский)",
+        "Voluntary contribution form (English)",
+      ),
+      url: iceeUp("2026/06/Voluntary-Contribution-for-IAEEE.pdf"),
+    },
+  ] as ConferenceDoc[],
+  regulation: {
+    kind: "pdf",
+    title: L("Положение о наградах МАЭСС", "IAEEE Awards Regulation"),
+    url: iceeUp("2024/08/Положение-о-наградах-МАЭСС.pdf"),
+  } as ConferenceDoc,
+};
+
+export const conferenceCommittee: {
+  email?: string;
+  name: LText;
+  phone: string;
+  role: LText;
+}[] = [
+  {
+    name: L("Айдарбек Стамов", "Aidarbek Stamov"),
+    role: L("Координатор по инжинирингу", "Engineering coordinator"),
+    phone: "+996 705 90 89 41",
+  },
+  {
+    name: L("Данияр Абдыкалыков", "Daniiar Abdykalykov"),
+    role: L("Координатор по производству", "Manufacturing coordinator"),
+    phone: "+996 776 17 19 71",
+  },
+  {
+    name: L("Ажаркан Дуйшокоева", "Azharkan Duishokoeva"),
+    role: L(
+      "Главный бухгалтер, оплата взносов",
+      "Chief accountant, fees and invoices",
+    ),
+    phone: "+996 707 75 25 57",
+    email: "dajara2562@gmail.com",
   },
 ];

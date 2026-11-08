@@ -53,7 +53,7 @@ export function AboutTeaser({
                   alt={president.name}
                   fill
                   sizes="176px"
-                  className="object-cover grayscale contrast-[1.05]"
+                  className="object-cover"
                 />
               )}
             </div>
