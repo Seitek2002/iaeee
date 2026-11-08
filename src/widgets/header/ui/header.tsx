@@ -25,12 +25,12 @@ export function Header() {
   const close = useMenuStore((s) => s.close);
   const [scrolled, setScrolled] = useState(false);
 
-  // Меню закрывается при переходе на другую страницу.
-  const [lastPath, setLastPath] = useState(pathname);
-  if (lastPath !== pathname) {
-    setLastPath(pathname);
-    if (open) close();
-  }
+  // Меню закрывается при переходе на другую страницу. Именно в эффекте, а не
+  // в рендере: close() обновляет внешний Zustand-стор, а менять его во время
+  // рендера React запрещает («Cannot update a component while rendering…»).
+  useEffect(() => {
+    close();
+  }, [pathname, close]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
